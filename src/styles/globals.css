@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-black text-slate-100;
+}
+
+.song-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-title {
+    text-wrap: wrap;
+    
+}
