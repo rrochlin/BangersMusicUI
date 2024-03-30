@@ -4,10 +4,6 @@ import Link from "next/link";
 
 import { api } from "~/utils/api";
 
-const CreateSongWizard = () => {
-  
-}
-
 export default function Home() {
   const {data} = api.song.getAll.useQuery();
   console.log(data);
