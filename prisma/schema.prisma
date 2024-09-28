@@ -61,15 +61,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Song          Song[]
-  Queue         Queue[]
+  id              String            @id @default(cuid())
+  name            String?
+  email           String?           @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  Song            Song[]
+  Queue           Queue[]
+  PlaylistPointer PlaylistPointer[]
 }
 
 model VerificationToken {
@@ -81,6 +82,22 @@ model VerificationToken {
 }
 
 model Queue {
+  id        Int      @id @default(sequence())
+  title     String
+  url       String
+  source    String
+  thumbnail String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+
+  @@index([title])
+  @@index([createdById])
+}
+
+model PlaylistPointer {
   id        Int      @id @default(sequence())
   title     String
   url       String

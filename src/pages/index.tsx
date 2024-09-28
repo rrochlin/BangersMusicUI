@@ -5,8 +5,9 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const {data} = api.queue.getAll.useQuery();
-  console.log(data);
+  const {data: pointer} = api.pointer.getAll.useQuery();
+  const {data: queue} = api.queue.getQueue.useQuery();
+  console.log(queue);
   return (
     <>
       <Head>
@@ -20,7 +21,7 @@ export default function Home() {
             Bangers <span className="text-[hsl(280,100%,70%)]">Music</span>
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            {data?.map((song) => (
+            {queue?.map((song) => (
               <div key={song.id} className="flex song-card">
                 <img className="h-50 w-90" src={song.thumbnail}/>
                 <p className="song-title w-90">{song.title}</p>
